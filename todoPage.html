@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            TODO List
+        </title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="todoStyle.css">  
+        <!-- <script src="todo.js"></script> -->
+    </head>
+    <body>
+        <header>
+                <input type="button" id="profile" value="Profile" onclick=redirect();>
+                <input type="button" value="Delete" onclick=deleteTask();>
+                <input type="button" value="Mark Done" onclick=setStatus();>
+                <a href="#newrow">
+                    <input type="button" value="Add" >
+                </a>
+                <div class="heading">
+                    <input type="text" id="name" disabled style="text-align: center;">
+                    <input type="button" id="logout" value="LOGOUT" onclick=backToLogin()>
+                </div>
+                <div class="clear"></div>
+
+                <div class="container">
+                    <div class="list">​
+                        <table class="table">
+                            <thead class="head" style=" color: white;font-family: Arial, Helvetica, sans-serif;"><th>TO-DO LIST</th></thead>
+                            <thead >
+                                <th>Mark Done</th>
+                                <th>Task</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Delete</th>
+                            </thead>
+                            
+                            <tbody id="table"></tbody>
+
+                        </table>
+
+                        <form id="newrow">
+                            <table class="addRow">
+                                <thead class="head" style=" color: white;font-family: Arial, Helvetica, sans-serif;"><th>ADD TASK</th></thead>
+                                <thead>
+                                    <th>Task</th>
+                                    <th>Category</th>
+                                    <th>Date</th>
+                                    <th>Add</th>
+                                </thead>
+                                
+
+                                <tr>
+                                    <td><input type="text" id="task" placeholder="Task"></td>
+                                    <td><input type="text" id="category" placeholder="Category"></td>
+                                    <td><input type="date" id="date" placeholder="Date"></td>
+                                    <td><input type="button" id="add" value="Add" onclick=insertRow() style="display: inline-block;">
+                                        <input type="button" id="save" value="Save" onclick="saveChanges()" style="display: none;">
+                                    </td>                               
+
+
+                                </tr>
+                            </table>
+                        </form>
+                        
+                    </div>
+                    <div class="profileBox">
+                        <img id="profilePic" alt="profile image" style="width: 150px; height: 150px;">
+                    </div>
+                </div>
+
+                
+                <script src="todo.js"></script>
+        </header>
+    </body>
+</html>

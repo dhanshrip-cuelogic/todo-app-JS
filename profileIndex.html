@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            Profile Page
+        </title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="regStyle.css">
+        <link rel="stylesheet" href="profile.css">
+        <style>
+            
+        </style>       
+    </head>
+    <body>
+        <div class="profileInfo">
+
+            <h1 class="heading">Personal Information</h1>
+            <div class="profileImgBox">
+                <img id="profilePic" alt="profile image" style="width: 150px; height: 150px;">
+            </div>
+
+            <div class="profileForm">
+
+                <div class="label">Username</div><input type="text" id="uname" class="regInput" disabled><br>
+                <div class="label">Password</div><input type="text" id="pass" class="regInput" disabled><br>
+                <div class="label">First Name</div><input type="text" id="fname" class="regInput" disabled><br>
+                <div class="label">Last Name</div><input type="text" id="lname" class="regInput" disabled><br>
+                <div class="label">Gender</div><input type="text" id="gender" class="regInput" disabled><br>
+                <div class="label">Address</div><input type="text" id="add" class="regInput" disabled><br>
+
+            </div>
+
+            <button id="addbtn" onclick="editProfile()" style="display: inline-block;">Edit</button>
+            <button id="save" onclick="saveProfileInfo()" style="display: none;">Save</button>
+
+            <script src="profile.js"> </script>
+        </div>
+    </body>
+</html>
