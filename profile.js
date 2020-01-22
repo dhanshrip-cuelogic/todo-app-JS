@@ -33,7 +33,8 @@ function showProfile()
     document.getElementById("pass").value=pass;
     document.getElementById("fname").value=fname;
     document.getElementById("lname").value=lname;
-    document.getElementById("gender").value=gender;
+    // document.querySelector('input[name="gender"]').value=gender;
+    // document.getElementById("gender").value=gender;
     document.getElementById("add").value=add;
 }
 
@@ -41,31 +42,37 @@ function showProfile()
 
 function editProfile(){
 
-    document.getElementById("pass").disabled=false;
-    document.getElementById("fname").disabled=false;
-    document.getElementById("lname").disabled=false;
-    document.getElementById("gender").disabled=false;
-    document.getElementById("add").disabled=false;
 
     document.getElementById("save").style.display="inline-block";
     document.getElementById("addbtn").style.display="none";
+
+
+    document.getElementById("pass").disabled=false;
+    document.getElementById("fname").disabled=false;
+    document.getElementById("lname").disabled=false;
+    // document.getElementById("gender").disabled=false;
+    document.getElementById("add").disabled=false;
 
 }
 
 function saveProfileInfo()
 {
 
+    document.getElementById("save").style.display="none";
+    document.getElementById("addbtn").style.display="inline-block";
+
     document.getElementById("pass").disabled=true;
     document.getElementById("fname").disabled=true;
     document.getElementById("lname").disabled=true;
-    document.getElementById("gender").disabled=true;
+    // document.getElementById("gender").disabled=true;
     document.getElementById("add").disabled=true;
 
     data.pass=document.getElementById("pass").value;
     data.add=document.getElementById("add").value;
     data.fname=document.getElementById("fname").value;
     data.lname=document.getElementById("lname").value;
-    data.gender=document.getElementById("gender").value;
+    // data.gender= document.querySelector('input[name="gender"]:checked').value;
+  
 
     localStorage.setItem("values",JSON.stringify(localData));
 
@@ -82,5 +89,69 @@ function saveProfileInfo()
     // allUser.push(dataObj);
     // localStorage.setItem("values",JSON.stringify(allUser));
     showProfile();
+
+}
+
+function validateProfile(){
+
+    let fname= document.getElementById("fname").value;
+    let lname= document.getElementById("lname").value;
+    // let gender= document.querySelector('input[name="gender"]:checked').value;
+    let add= document.getElementById("add").value;
+    let pass= document.getElementById("pass").value;
+
+    let regexPass= /([A-Z]+)([a-z]?.*)([!@#\$%\^&\*\.].*)([0-9].*)/;
+
+    let genderValue=true;
+    let flag = false;
+    
+    genderValue= checkGender();
+
+    let profile = sessionStorage.getItem("displayPicture");
+
+
+    // if(genderValue==false){
+    //     alert("Please select any one gender.");
+    // }
+
+    // else if(fname==""|| lname==""|| pass==""){
+
+    //     alert("Please fill all the required details.");
+    // }
+    if(fname==""|| lname==""|| pass==""){
+
+        alert("Please fill all the required details.");
+    }
+    else if(pass.length<8){
+        alert("length of password should be greater than 8.")    
+        
+    }
+    else if(!(regexPass.test(pass))){
+        alert("Invalid Password");
+    }
+    else{
+        flag=true;
+    }
+    if(flag==true)
+    {
+        saveProfileInfo();
+    }
+
+}
+
+function checkGender(){
+    let a= document.getElementsByName("gender");
+    let count=0;
+    for( let i=0; i<a.length;i++)
+    {
+        if(a[i].checked==true)
+        {
+            count++;
+        }
+    }
+    if(count!=1)
+    {
+        return (false);
+    }
 
 }

@@ -40,7 +40,8 @@ text-align: left;
 .logInput{
     width: 100%;
 }
-p{
+span{
+    margin-left: 10px;
     font-size: 12px;
     font-style: oblique;
     color: red;
@@ -54,4 +55,8 @@ p{
     vertical-align: middle;
     margin-left: 20px;
 
+}
+
+.submitbtn a{
+    text-decoration: none;
 }

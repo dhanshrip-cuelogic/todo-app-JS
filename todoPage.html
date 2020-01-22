@@ -18,32 +18,23 @@
                     <input type="button" value="Add" >
                 </a>
                 <div class="heading">
+                    <!-- <a href="document.getElementById("profilePic").src = data.profileimg;" class="profileBox">
+                        <img id="profilePic" alt="profile image" style="width: 50px; height: 50px; border: 0px; border-radius: 50%; ">
+                    </a> -->
                     <input type="text" id="name" disabled style="text-align: center;">
                     <input type="button" id="logout" value="LOGOUT" onclick=backToLogin()>
                 </div>
                 <div class="clear"></div>
-
+        </header>
                 <div class="container">
-                    <div class="list">​
-                        <table class="table">
-                            <thead class="head" style=" color: white;font-family: Arial, Helvetica, sans-serif;"><th>TO-DO LIST</th></thead>
-                            <thead >
-                                <th>Mark Done</th>
-                                <th>Task</th>
-                                <th>Category</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Delete</th>
-                            </thead>
-                            
-                            <tbody id="table"></tbody>
 
-                        </table>
+                    <div class="list">​
+                       
 
                         <form id="newrow">
                             <table class="addRow">
-                                <thead class="head" style=" color: white;font-family: Arial, Helvetica, sans-serif;"><th>ADD TASK</th></thead>
-                                <thead>
+                                <!-- <thead class="head" style=" color: white;font-family: Arial, Helvetica, sans-serif;"><th>ADD TASK</th></thead> -->
+                                <thead class="head">
                                     <th>Task</th>
                                     <th>Category</th>
                                     <th>Date</th>
@@ -63,15 +54,36 @@
                                 </tr>
                             </table>
                         </form>
-                        
+
                     </div>
+
                     <div class="profileBox">
                         <img id="profilePic" alt="profile image" style="width: 150px; height: 150px;">
                     </div>
+
+                    <div class="list">
+
+                        <table class="table">
+                            
+                            <thead class="head1">
+                                <th>TO-DO LIST</th>
+                                <th>Task</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                            </thead>
+                            
+                            <tbody id="table"></tbody>
+
+                        </table>
+                        
+                    </div>
+                   
                 </div>
 
                 
                 <script src="todo.js"></script>
-        </header>
+      
     </body>
 </html>

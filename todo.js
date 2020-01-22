@@ -14,6 +14,12 @@ for(let i of localData)
     }
 } 
 
+
+// if(data.todoObj.length==0){
+//     document.getElementsByClassName("head1").style.display="none";
+// }
+
+
 document.getElementById("name").value= data.fname + " " +data.lname;
 
 showData();
@@ -43,6 +49,11 @@ function insertRow(){
         status:status
     };
 
+  
+    // if(data.todoObj.length==0){
+    //     document.getElementsByClassName("head1").style.visibility="hidden";
+    // }
+        
 
     data.todoObj.push(newData);
     localStorage.setItem("values",JSON.stringify(localData));
@@ -54,7 +65,8 @@ function insertRow(){
 }
 
 function showData(){
-    
+
+
     let todoItems=[];
     let row;
     let list = document.getElementById("table");
@@ -95,6 +107,13 @@ function deleteTask()
         }
 
     }
+
+
+    // if(data.todoObj.length==0){
+    //     document.getElementsByClassName("head1").style.display="none";
+    // }
+
+
     localStorage.setItem("values",JSON.stringify(localData));
 
 }
@@ -130,9 +149,6 @@ function editData(i)
     document.getElementById("add").style.display="none";
 
     t=i;
-    
-
-    // saveChanges(i);
 }
 
 function saveChanges()
@@ -144,6 +160,9 @@ function saveChanges()
     editItem.task=document.getElementById("task").value;
     editItem.date=document.getElementById("date").value;
     editItem.category=document.getElementById("category").value;
+
+    document.getElementById("save").style.display="none";
+    document.getElementById("add").style.display="inline-block";
 
     localStorage.setItem("values",JSON.stringify(localData));
     document.getElementById("newrow").reset();

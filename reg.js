@@ -4,12 +4,12 @@ function getData() {
     let uname= document.getElementById("username").value;
     let fname= document.getElementById("fname").value;
     let lname= document.getElementById("lname").value;
-    // let gender= document.querySelector('input[name="gender"]:checked').value;
+    let gender= document.querySelector('input[name="gender"]:checked').value;
     let add= document.getElementById("address").value;
     let pass= document.getElementById("password").value;
     let confirmPass = document.getElementById("confirmPass").value;
     // let profileimg=document.getElementById("profileimg").value;
-    let gender;
+    // let gender;
 
     let regexPass= /([A-Z]+)([a-z]?.*)([!@#\$%\^&\*\.].*)([0-9].*)/;
 
@@ -29,17 +29,13 @@ function getData() {
         
     }
 
-    else if(temp==false){
-        alert("Username already exist!!");
-    }
-
     else if(genderValue==false){
         alert("Please select any one gender.");
     }
 
-    else if(uname=="" || fname==""|| lname==""|| add==""|| pass==""){
+    else if(uname=="" || fname==""|| lname==""|| pass==""){
 
-        alert("Please fill all the details.");
+        alert("Please fill all the required details.");
     }
     else if(pass.length<8){
         alert("length of password should be greater than 8.")    
@@ -47,6 +43,9 @@ function getData() {
     }
     else if(!(regexPass.test(pass))){
         alert("Invalid Password");
+    }
+    else if(temp==false){
+        alert("Username already exist!!");
     }
     else{
         flag=true;
@@ -68,6 +67,7 @@ function getData() {
         allUser.push(dataObj);
         localStorage.setItem("values",JSON.stringify(allUser));
         document.getElementById("myform").reset();
+        alert("Registered Successfully")
         redirect();
     
     }
@@ -77,7 +77,7 @@ function redirect(){
 }
 
 function checkuname(uname){
-    let localData = JSON.parse(localStorage.getItem("values"));
+    let localData = JSON.parse(localStorage.getItem("values")) || [];
 
     for(let i of localData)
     {
