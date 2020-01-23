@@ -4,12 +4,22 @@ function getData() {
     let uname= document.getElementById("username").value;
     let fname= document.getElementById("fname").value;
     let lname= document.getElementById("lname").value;
-    let gender= document.querySelector('input[name="gender"]:checked').value;
+    
     let add= document.getElementById("address").value;
     let pass= document.getElementById("password").value;
     let confirmPass = document.getElementById("confirmPass").value;
     // let profileimg=document.getElementById("profileimg").value;
-    // let gender;
+    let gender;
+
+    let a= document.querySelectorAll('input[name="gender"]');
+    for(var i=0;i<a.length;i++)
+    {
+        if(a[i].checked==true)
+        {
+            gender=a[i].value;
+        }
+    }
+
 
     let regexPass= /([A-Z]+)([a-z]?.*)([!@#\$%\^&\*\.].*)([0-9].*)/;
 
@@ -91,7 +101,7 @@ function checkuname(uname){
 }
 
 function checkGender(){
-    let a= document.getElementsByName("gender");
+    let a= document.querySelectorAll('input[name="gender"]');
     let count=0;
     for( let i=0; i<a.length;i++)
     {

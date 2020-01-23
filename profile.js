@@ -33,9 +33,18 @@ function showProfile()
     document.getElementById("pass").value=pass;
     document.getElementById("fname").value=fname;
     document.getElementById("lname").value=lname;
-    // document.querySelector('input[name="gender"]').value=gender;
-    // document.getElementById("gender").value=gender;
     document.getElementById("add").value=add;
+
+    if (gender == "Male"){
+        document.getElementsByName("gender")[0].checked=true;
+    }
+    else if (gender == "Female"){
+        document.getElementsByName("gender")[1].checked=true;
+    }
+    else{
+        document.getElementsByName("gender")[2].checked=true;
+    }
+    
 }
 
 
@@ -50,7 +59,15 @@ function editProfile(){
     document.getElementById("pass").disabled=false;
     document.getElementById("fname").disabled=false;
     document.getElementById("lname").disabled=false;
-    // document.getElementById("gender").disabled=false;
+    // document.getElementsByName("gender").disabled=false;
+    document.querySelectorAll('input[name="gender"]').disabled=false;
+    // for(var i=0;i<a.length;i++)
+    //  {
+    //     (a[i].disabled==false);
+    
+    //  } 
+
+
     document.getElementById("add").disabled=false;
 
 }
@@ -64,30 +81,36 @@ function saveProfileInfo()
     document.getElementById("pass").disabled=true;
     document.getElementById("fname").disabled=true;
     document.getElementById("lname").disabled=true;
-    // document.getElementById("gender").disabled=true;
+    // document.getElementsByName("gender").disabled=true;
+    document.querySelectorAll('input[name="gender"]').disabled=true;
+
+    // for(var i=0;i<a.length;i++)
+    //  {
+    //     (a[i].disabled==true);
+    
+    //  } 
+
     document.getElementById("add").disabled=true;
 
     data.pass=document.getElementById("pass").value;
     data.add=document.getElementById("add").value;
     data.fname=document.getElementById("fname").value;
     data.lname=document.getElementById("lname").value;
-    // data.gender= document.querySelector('input[name="gender"]:checked').value;
+    data.gender= document.querySelectorAll('input[name="gender"]');
+
+    var a =document.querySelectorAll('input[name="gender"]');
+
+   for(var i=0;i<a.length;i++)
+    {
+        if(a[i].checked==true)
+        {
+            data.gender=a[i].value;
+        }
+    } 
   
 
     localStorage.setItem("values",JSON.stringify(localData));
 
-    // let dataObj= {
-    //     uname:uname,
-    //     fname:fname,
-    //     lname:lname,
-    //     gender:gender,
-    //     add:add,
-    //     pass:pass,
-    // };
-
-    // let allUser=JSON.parse(localStorage.getItem('values')) || [];
-    // allUser.push(dataObj);
-    // localStorage.setItem("values",JSON.stringify(allUser));
     showProfile();
 
 }
@@ -110,14 +133,6 @@ function validateProfile(){
     let profile = sessionStorage.getItem("displayPicture");
 
 
-    // if(genderValue==false){
-    //     alert("Please select any one gender.");
-    // }
-
-    // else if(fname==""|| lname==""|| pass==""){
-
-    //     alert("Please fill all the required details.");
-    // }
     if(fname==""|| lname==""|| pass==""){
 
         alert("Please fill all the required details.");
@@ -129,6 +144,10 @@ function validateProfile(){
     else if(!(regexPass.test(pass))){
         alert("Invalid Password");
     }
+    else if(genderValue==false){
+        alert("Please select any one gender.");
+    }
+
     else{
         flag=true;
     }
@@ -140,7 +159,7 @@ function validateProfile(){
 }
 
 function checkGender(){
-    let a= document.getElementsByName("gender");
+    let a= document.querySelectorAll('input[name="gender"]');
     let count=0;
     for( let i=0; i<a.length;i++)
     {

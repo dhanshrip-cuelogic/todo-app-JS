@@ -33,26 +33,38 @@ function insertRow(){
     let task= document.getElementById("task").value;
     let startdate= document.getElementById("startdate").value;
     let duedate= document.getElementById("duedate").value;
-    let category= document.querySelector("input[name=category]:checked").value;
-    
+    let a= document.querySelectorAll("input[name=category]");
+    let category;
+
+    for(var i=0;i<a.length;i++)
+    {
+        if(a[i].checked==true)
+        {
+            category=a[i].value;
+        }
+    }
     let status="Not Done";
+    let values=validateAdd(task,startdate,duedate,category);
 
-    let newData={
-        task:task,
-        startdate:startdate,
-        duedate:duedate,
-        category:category,
-        status:status
-    };
-
-    data.todoObj.push(newData);
-    localStorage.setItem("values",JSON.stringify(localData));
-    document.getElementById("newrow").reset();
-    clearList();
-    showData();
+    if(values==true)
+    {
+        let newData={
+            task:task,
+            startdate:startdate,
+            duedate:duedate,
+            category:category,
+            status:status
+        };
     
-
+        data.todoObj.push(newData);
+        localStorage.setItem("values",JSON.stringify(localData));
+        document.getElementById("newrow").reset();
+        clearList();
+        showData();
+    }
+    
 }
+
 
 function showData(){
 
@@ -74,9 +86,16 @@ function showData(){
        "<td>" + todoItems[i].category + "</td>" +
        "<td>"+ todoItems[i].startdate + "</td>" +
         "<td>"+ todoItems[i].duedate + "</td>" +
-        "<td>"+ todoItems[i].status + "</td>" +
-        "<td>"+'<a href="#newrow"><button onclick="checkEdit('+i+')">Edit</button></a>' +"</td>";
+        "<td>"+ todoItems[i].status + "</td>"+
+        "<td>"+'<a href="#newrow"><button id="edit'+i+'" style="display: inline-block;" onclick="editData('+i+')">Edit</button></a>' +"</td>";
+ 
         list.appendChild(row);
+
+        if(data.todoObj[i].status=="Done")
+        {
+            document.getElementById("edit"+i).style.display="none";
+
+        }
 
     }      
     if(todoItems.length==0)
@@ -95,6 +114,18 @@ function showData(){
 function clearList(){
     document.getElementById("table").innerHTML="";
 }
+
+
+function clearChecks(){
+    let a= document.querySelectorAll("input[name=category]");
+
+    for(var i=0;i<a.length;i++)
+    {
+        document.getElementsByName("category")[i].checked=false;
+    }
+
+}
+
 function deleteTask()
 {
     let tableData=document.getElementById("table")
@@ -132,6 +163,7 @@ function setStatus()
         if(allCheckedData[i].checked)
         {
             data.todoObj[i].status="Done";
+
         }
     }
     localStorage.setItem("values",JSON.stringify(localData));
@@ -139,15 +171,6 @@ function setStatus()
     showData();
 }
 
-function checkEdit(i){
-    if(data.todoObj[i].status=="Done")
-    {
-        alert("Cannot edit completed task.");
-    }
-    else{
-        editData(i);
-    }
-}
 
 function editData(i)
 {
@@ -157,10 +180,21 @@ function editData(i)
     let duedate=editItem.duedate;
     let category=editItem.category;
 
+    clearChecks();
+
     document.getElementById("task").value=task;
     document.getElementById("startdate").value=startdate;
     document.getElementById("duedate").value=duedate;
-    document.getElementsByName("category").value=category;
+    if (category == "Home"){
+        document.getElementsByName("category")[0].checked=true;
+    }
+    else if (category == "Work"){
+        document.getElementsByName("category")[1].checked=true;
+    }
+    else{
+        document.getElementsByName("category")[2].checked=true;
+    }
+    
     document.getElementById("save").style.display="inline-block";
     document.getElementById("add").style.display="none";
 
@@ -176,7 +210,16 @@ function saveChanges()
     editItem.task=document.getElementById("task").value;
     editItem.startdate=document.getElementById("startdate").value;
     editItem.duedate=document.getElementById("duedate").value;
-    editItem.category=document.querySelector("input[type=checkbox]:checked").value;
+   var a =document.querySelectorAll("input[type=checkbox]");
+
+   for(var i=0;i<a.length;i++)
+    {
+        if(a[i].checked==true)
+        {
+            editItem.category=a[i].value;
+        }
+    }
+
 
     document.getElementById("save").style.display="none";
     document.getElementById("add").style.display="inline-block";
@@ -188,4 +231,25 @@ function saveChanges()
     
 }
 
+function validateAdd(task,startdate,duedate,category){
+    if(task==""||startdate==""||duedate=="")
+    {
+        alert("Please fill all details");
+        return false;
+    }
 
+    else if(category==undefined){
+        alert("Please select category");
+    }
+
+    else if(startdate>duedate)
+    {
+        alert("Please enter correct Due Date");
+    }
+
+    else{
+
+        return true;
+    }
+
+}
