@@ -1,5 +1,5 @@
 let logname, logpass;
-let regData = JSON.parse(localStorage.getItem("values"));
+let regData = JSON.parse(localStorage.getItem("values")) || [];
 let flag=false;
 
 function getLogData()
@@ -7,7 +7,7 @@ function getLogData()
   
     logname = document.getElementById("username").value;
     logpass = document.getElementById("password").value;
-    regData = JSON.parse(localStorage.getItem("values"));
+    regData = JSON.parse(localStorage.getItem("values")) || [];
 
 
     if(logname=="" || logpass==""){

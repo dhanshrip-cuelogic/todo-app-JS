@@ -39,13 +39,13 @@ function getData() {
         
     }
 
-    else if(genderValue==false){
-        alert("Please select any one gender.");
-    }
-
     else if(uname=="" || fname==""|| lname==""|| pass==""){
 
         alert("Please fill all the required details.");
+    }
+
+    else if(genderValue==false){
+        alert("Please select any one gender.");
     }
     else if(pass.length<8){
         alert("length of password should be greater than 8.")    
