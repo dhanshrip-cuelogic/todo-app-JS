@@ -14,12 +14,6 @@ for(let i of localData)
     }
 } 
 
-
-// if(data.todoObj.length==0){
-//     document.getElementsByClassName("head1").style.display="none";
-// }
-
-
 document.getElementById("name").value= data.fname + " " +data.lname;
 
 showData();
@@ -37,23 +31,19 @@ function insertRow(){
 
     
     let task= document.getElementById("task").value;
-    let date= document.getElementById("date").value;
-    let category= document.getElementById("category").value;
+    let startdate= document.getElementById("startdate").value;
+    let duedate= document.getElementById("duedate").value;
+    let category= document.querySelector("input[name=category]:checked").value;
     
     let status="Not Done";
 
     let newData={
         task:task,
-        date:date,
+        startdate:startdate,
+        duedate:duedate,
         category:category,
         status:status
     };
-
-  
-    // if(data.todoObj.length==0){
-    //     document.getElementsByClassName("head1").style.visibility="hidden";
-    // }
-        
 
     data.todoObj.push(newData);
     localStorage.setItem("values",JSON.stringify(localData));
@@ -71,8 +61,10 @@ function showData(){
     let row;
     let list = document.getElementById("table");
 
-    todoItems = data.todoObj;
+    document.getElementById("profilePic").src = data.profileimg;
 
+    todoItems = data.todoObj;
+    
     for(let i=0;i<todoItems.length;i++)
     {
         row = document.createElement('tr');
@@ -80,14 +72,23 @@ function showData(){
         row.innerHTML ="<td>" + '<input type="checkbox" id="markDone" value="Yes">'+ "</td>" +
        "<td>" + todoItems[i].task + "</td>" +
        "<td>" + todoItems[i].category + "</td>" +
-        "<td>"+ todoItems[i].date + "</td>" +
+       "<td>"+ todoItems[i].startdate + "</td>" +
+        "<td>"+ todoItems[i].duedate + "</td>" +
         "<td>"+ todoItems[i].status + "</td>" +
-        "<td>"+'<a href="#newrow"><button onclick="editData('+i+')">Edit</button></a>' +"</td>";
+        "<td>"+'<a href="#newrow"><button onclick="checkEdit('+i+')">Edit</button></a>' +"</td>";
         list.appendChild(row);
 
     }      
+    if(todoItems.length==0)
+    {
+        document.getElementById("head1").style.visibility="hidden";
+
+    }
+    else{
+        document.getElementById("head1").style.visibility="visible";
+    }
+
     
-    document.getElementById("profilePic").src = data.profileimg;
             
 }
 
@@ -108,11 +109,14 @@ function deleteTask()
 
     }
 
+    if(data.todoObj.length==0)
+    {
+        document.getElementById("head1").style.visibility="hidden";
 
-    // if(data.todoObj.length==0){
-    //     document.getElementsByClassName("head1").style.display="none";
-    // }
-
+    }
+    else{
+        document.getElementById("head1").style.visibility="visible";
+    }
 
     localStorage.setItem("values",JSON.stringify(localData));
 
@@ -135,16 +139,28 @@ function setStatus()
     showData();
 }
 
+function checkEdit(i){
+    if(data.todoObj[i].status=="Done")
+    {
+        alert("Cannot edit completed task.");
+    }
+    else{
+        editData(i);
+    }
+}
+
 function editData(i)
 {
     let editItem=data.todoObj[i];
     let task=editItem.task;
-    let date=editItem.date;
+    let startdate=editItem.startdate;
+    let duedate=editItem.duedate;
     let category=editItem.category;
 
     document.getElementById("task").value=task;
-    document.getElementById("date").value=date;
-    document.getElementById("category").value=category;
+    document.getElementById("startdate").value=startdate;
+    document.getElementById("duedate").value=duedate;
+    document.getElementsByName("category").value=category;
     document.getElementById("save").style.display="inline-block";
     document.getElementById("add").style.display="none";
 
@@ -158,8 +174,9 @@ function saveChanges()
     let editItem=data.todoObj[t];
 
     editItem.task=document.getElementById("task").value;
-    editItem.date=document.getElementById("date").value;
-    editItem.category=document.getElementById("category").value;
+    editItem.startdate=document.getElementById("startdate").value;
+    editItem.duedate=document.getElementById("duedate").value;
+    editItem.category=document.querySelector("input[type=checkbox]:checked").value;
 
     document.getElementById("save").style.display="none";
     document.getElementById("add").style.display="inline-block";
