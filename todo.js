@@ -66,7 +66,109 @@ function insertRow(){
 }
 
 
-function showData(){
+
+// function saveChanges()
+// {
+
+//     let task= document.getElementById("task").value;
+//     let startdate= document.getElementById("startdate").value;
+//     let duedate= document.getElementById("duedate").value;
+//     let a= document.querySelectorAll("input[name=category]");
+//     let category;
+
+//     for(var i=0;i<a.length;i++)
+//     {
+//         if(a[i].checked==true)
+//         {
+//             category=a[i].value;
+//         }
+//     }
+
+//     let values=validateAdd(task,startdate,duedate,category);
+
+//     if(values==true)
+//     {
+//         let editItem=data.todoObj[t];
+
+    
+
+//         editItem.task=document.getElementById("task").value;
+//         editItem.startdate=document.getElementById("startdate").value;
+//         editItem.duedate=document.getElementById("duedate").value;
+//         var a =document.querySelectorAll("input[type=checkbox]");
+
+//         for(var i=0;i<a.length;i++)
+//         {
+//             if(a[i].checked==true)
+//             {
+//                 editItem.category=a[i].value;
+//             }
+//         }
+
+//         document.getElementById("save").style.display="none";
+//         document.getElementById("add").style.display="inline-block";
+
+//         localStorage.setItem("values",JSON.stringify(localData));
+//         document.getElementById("newrow").reset();
+//         clearList();
+//         showData();
+    
+//     }
+
+    
+// }
+
+
+function saveChanges()
+{
+
+    let editItem=data.todoObj[t];
+
+    let task= document.getElementById("task").value;
+    let startdate= document.getElementById("startdate").value;
+    let duedate= document.getElementById("duedate").value;
+    let b= document.querySelectorAll("input[name=category]");
+    let category;
+
+    for(var i=0;i<b.length;i++)
+    {
+        if(b[i].checked==true)
+        {
+            category=b[i].value;
+        }
+    }
+    let values=validateAdd(task,startdate,duedate,category);
+
+    if(values==true)
+    {
+
+        editItem.task=document.getElementById("task").value;
+        editItem.startdate=document.getElementById("startdate").value;
+        editItem.duedate=document.getElementById("duedate").value;
+        var a =document.querySelectorAll("input[type=checkbox]");
+
+        for(var i=0;i<a.length;i++)
+        {
+            if(a[i].checked==true)
+            {
+                editItem.category=a[i].value;
+            }
+        }
+
+        document.getElementById("save").style.display="none";
+        document.getElementById("add").style.display="inline-block";
+
+        localStorage.setItem("values",JSON.stringify(localData));
+        document.getElementById("newrow").reset();
+        clearList();
+        showData();
+    }
+
+}
+
+
+function showData()
+{
 
 
     let todoItems=[];
@@ -75,7 +177,9 @@ function showData(){
 
     document.getElementById("profilePic").src = data.profileimg;
 
+
     todoItems = data.todoObj;
+
     
     for(let i=0;i<todoItems.length;i++)
     {
@@ -201,36 +305,6 @@ function editData(i)
     t=i;
 }
 
-function saveChanges()
-{
-    
-
-    let editItem=data.todoObj[t];
-
-    editItem.task=document.getElementById("task").value;
-    editItem.startdate=document.getElementById("startdate").value;
-    editItem.duedate=document.getElementById("duedate").value;
-   var a =document.querySelectorAll("input[type=checkbox]");
-
-   for(var i=0;i<a.length;i++)
-    {
-        if(a[i].checked==true)
-        {
-            editItem.category=a[i].value;
-        }
-    }
-
-
-    document.getElementById("save").style.display="none";
-    document.getElementById("add").style.display="inline-block";
-
-    localStorage.setItem("values",JSON.stringify(localData));
-    document.getElementById("newrow").reset();
-    clearList();
-    showData();
-    
-}
-
 function validateAdd(task,startdate,duedate,category){
     if(task==""||startdate==""||duedate=="")
     {
@@ -251,5 +325,72 @@ function validateAdd(task,startdate,duedate,category){
 
         return true;
     }
+
+}
+
+function sortBy(){
+    clearList();
+    
+    let sort=document.getElementById("filter").value;
+    if(sort!="All")
+    {   
+        let todoItems=[];
+        let row;
+        let temp=0,flag=0;
+        let list = document.getElementById("table");
+    
+        document.getElementById("profilePic").src = data.profileimg;
+    
+    
+        todoItems = data.todoObj;
+    
+        
+        for(let i=0;i<todoItems.length;i++)
+        {
+            if(todoItems[i].category==sort)
+            {
+                flag=1;
+                row = document.createElement('tr');
+    
+                row.innerHTML ="<td>" + '<input type="checkbox" id="markDone" value="Yes">'+ "</td>" +
+                "<td>" + todoItems[i].task + "</td>" +
+                "<td>" + todoItems[i].category + "</td>" +
+                "<td>"+ todoItems[i].startdate + "</td>" +
+                "<td>"+ todoItems[i].duedate + "</td>" +
+                "<td>"+ todoItems[i].status + "</td>"+
+                "<td>"+'<a href="#newrow"><button id="edit'+i+'" style="display: inline-block;" onclick="editData('+i+')">Edit</button></a>' +"</td>";
+        
+                list.appendChild(row);
+    
+                if(data.todoObj[i].status=="Done")
+                {
+                    document.getElementById("edit"+i).style.display="none";
+    
+                }
+                temp++;
+    
+            }
+            
+    
+        }    
+        
+        if(temp==0)
+        {
+            document.getElementById("head1").style.visibility="hidden";
+    
+        }
+        else{
+            document.getElementById("head1").style.visibility="visible";
+        }
+    
+
+    }
+
+    else{
+        clearList();
+        showData();
+    }
+
+   
 
 }

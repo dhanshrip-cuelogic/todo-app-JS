@@ -101,7 +101,8 @@ function saveProfileInfo()
     var a =document.querySelectorAll('input[name="gender"]');
 
    for(var i=0;i<a.length;i++)
-    {
+    {   
+    
         if(a[i].checked==true)
         {
             data.gender=a[i].value;
