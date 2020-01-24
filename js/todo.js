@@ -16,6 +16,8 @@ for(let i of localData)
 
 document.getElementById("name").value= data.fname + " " +data.lname;
 
+let sort=document.getElementById("filter").value;
+
 showData();
 
 function redirect(){
@@ -60,7 +62,7 @@ function insertRow(){
         localStorage.setItem("values",JSON.stringify(localData));
         document.getElementById("newrow").reset();
         clearList();
-        showData();
+        sortBy();
     }
     
 }
@@ -108,7 +110,7 @@ function saveChanges()
         localStorage.setItem("values",JSON.stringify(localData));
         document.getElementById("newrow").reset();
         clearList();
-        showData();
+       sortBy();
     }
 
 }
@@ -117,6 +119,7 @@ function saveChanges()
 function showData()
 {
 
+    document.getElementById("filter").value="All";
 
     let todoItems=[];
     let row;
@@ -128,6 +131,7 @@ function showData()
     todoItems = data.todoObj;
 
     
+    
     for(let i=0;i<todoItems.length;i++)
     {
         row = document.createElement('tr');
@@ -138,13 +142,15 @@ function showData()
        "<td>"+ todoItems[i].startdate + "</td>" +
         "<td>"+ todoItems[i].duedate + "</td>" +
         "<td>"+ todoItems[i].status + "</td>"+
-        "<td>"+'<a href="#newrow"><button id="edit'+i+'" style="display: inline-block;" onclick="editData('+i+')">Edit</button></a>' +"</td>";
+        "<td>"+'<a href="#newrow"><button id="edit'+i+'" style="display: inline-block;" onclick="editData('+i+')">Edit</button></a>'+
+        '<a><button id="del'+i+'" style="display: none;" onclick="deleteSingle('+i+')">Delete</button></a>'+"</td>";
  
         list.appendChild(row);
 
         if(data.todoObj[i].status=="Done")
         {
             document.getElementById("edit"+i).style.display="none";
+            document.getElementById("del"+i).style.display="inline-block";
 
         }
 
@@ -206,6 +212,8 @@ function deleteTask()
 
 function setStatus()
 {
+   
+
     let tableData=document.getElementById("table")
     let allCheckedData=tableData.getElementsByTagName("input");
     console.log(allCheckedData);
@@ -219,7 +227,8 @@ function setStatus()
     }
     localStorage.setItem("values",JSON.stringify(localData));
     clearList();
-    showData();
+    sortBy();
+
 }
 
 
@@ -305,13 +314,15 @@ function sortBy(){
                 "<td>"+ todoItems[i].startdate + "</td>" +
                 "<td>"+ todoItems[i].duedate + "</td>" +
                 "<td>"+ todoItems[i].status + "</td>"+
-                "<td>"+'<a href="#newrow"><button id="edit'+i+'" style="display: inline-block;" onclick="editData('+i+')">Edit</button></a>' +"</td>";
-        
+                "<td>"+'<a href="#newrow"><button id="edit'+i+'" style="display: inline-block;" onclick="editData('+i+')">Edit</button></a>'+
+                '<a><button id="del'+i+'" style="display: none;" onclick="deleteSingle('+i+')">Delete</button></a>'+"</td>";
+         
                 list.appendChild(row);
     
                 if(data.todoObj[i].status=="Done")
                 {
                     document.getElementById("edit"+i).style.display="none";
+                    document.getElementById("del"+i).style.display="inline-block";
     
                 }
                 temp++;
@@ -338,6 +349,10 @@ function sortBy(){
         showData();
     }
 
-   
-
 }
+
+// function deleteSingle(i)
+// {
+//     let editItem=data.todoObj[i];
+
+// }
