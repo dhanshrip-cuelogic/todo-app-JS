@@ -1,47 +1,68 @@
+(function()
+{
+    if(sessionStorage.getItem("values")==null)
+    {
+        window.location.href="loginIndex.html";
+       
+    }
+    if(!localStorage)
+    {
+        alert("Browser is not having local storage!!!!");
+    }
+})();
+
+
 let logname, logpass;
-let regData = JSON.parse(localStorage.getItem("values")) || [];
+let regData= parseLocalStorage();
 let flag=false;
 
+
 function getLogData()
-{
-  
+{ 
     logname = document.getElementById("username").value;
     logpass = document.getElementById("password").value;
-    regData = JSON.parse(localStorage.getItem("values")) || [];
+    regData = parseLocalStorage();
 
-
-    if(logname=="" || logpass==""){
+    if(logname=="" || logpass=="")
+    {
 
         alert("Please fill all the details.");
     }
-    else{
+    else
+    {
         validateData();
     }
 
 }
 
-function redirect(){
+
+function redirect()
+{
     alert("Login Successful");
     window.location.href="./page/todoPage.html";
- }
- 
- function validateData(){
+}
+
+
+function validateData()
+{
     flag=false;
+
     for(let i in regData)
     {
         let regName= regData[i].uname;
 
         if(regName==logname)
-        {   
+        {    
+            let regPass=regData[i].pass;  
             flag=true;
-            let regPass=regData[i].pass;     
+
             if(regPass==logpass)
             {
                 sessionStorage.setItem('values',logname);
                 redirect();  
-                // break;
             }
-            else{
+            else
+            {
                 alert("Invalid Password");   
             }
             
@@ -49,8 +70,14 @@ function redirect(){
         
     }
 
-    if(flag==false){
+    if(flag==false)
+    {
         alert("Username does not exist");
     }
         
+}
+
+function parseLocalStorage()
+{
+    return (JSON.parse(localStorage.getItem("values")) || []);
 }

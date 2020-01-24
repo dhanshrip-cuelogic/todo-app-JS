@@ -1,19 +1,18 @@
 *{
     box-sizing: border-box;
 }
+
 .container{
     width: 800px;
-    /* height: 550px; */
     border: 1px solid black;
     margin: 0px auto;
     padding: 30px 50px;
     background-color: cornsilk;
 }
+
 .regInput{
     margin-bottom: 20px;
-    /* margin-left: 20px; */
     font-size: 15px;
-
 }
 
 h1{
@@ -24,22 +23,22 @@ h1{
 }
 
 input{
-    margin-top: 5px;
-    
+    margin-top: 5px;    
 }
 
 .regLabel{
-font-weight: normal;
-text-align: left;
-
+    font-weight: normal;
+    text-align: left;
 }
 
 .radio{
     vertical-align: text-bottom;
 }
+
 .logInput{
     width: 100%;
 }
+
 span{
     margin-left: 10px;
     font-size: 12px;
@@ -54,7 +53,6 @@ span{
     border: 1px solid black;
     vertical-align: middle;
     margin-left: 20px;
-
 }
 
 .submitbtn a{

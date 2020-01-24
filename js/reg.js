@@ -1,14 +1,25 @@
+(function()
+{
+    if(sessionStorage.getItem("values")==null)
+    {
+        window.location.href="regIndex.html";
+       
+    }
+    if(!localStorage)
+    {
+        alert("Browser is not having local storage!!!!");
+    }
+})();
 
-function getData() {
-
+function getData()
+{
     let uname= document.getElementById("username").value;
     let fname= document.getElementById("fname").value;
-    let lname= document.getElementById("lname").value;
-    
+    let lname= document.getElementById("lname").value;    
     let add= document.getElementById("address").value;
     let pass= document.getElementById("password").value;
     let confirmPass = document.getElementById("confirmPass").value;
-    // let profileimg=document.getElementById("profileimg").value;
+    
     let gender;
 
     let a= document.querySelectorAll('input[name="gender"]');
@@ -19,7 +30,6 @@ function getData() {
             gender=a[i].value;
         }
     }
-
 
     let regexPass= /([A-Z]+)([a-z]?.*)([!@#\$%\^&\*\.].*)([0-9].*)/;
 
@@ -34,32 +44,40 @@ function getData() {
 
     let profile = sessionStorage.getItem("displayPicture");
 
-    if(pass!=confirmPass){
+    if(pass!=confirmPass)
+    {
         alert("Please type same password in both fields.");
         
     }
 
-    else if(uname=="" || fname==""|| lname==""|| pass==""){
+    else if(uname=="" || fname==""|| lname==""|| pass=="")
+    {
 
         alert("Please fill all the required details.");
     }
 
-    else if(genderValue==false){
+    else if(genderValue==false)
+    {
         alert("Please select any one gender.");
     }
-    else if(pass.length<8){
+    else if(pass.length<8)
+    {
         alert("length of password should be greater than 8.")    
         
     }
-    else if(!(regexPass.test(pass))){
+    else if(!(regexPass.test(pass)))
+    {
         alert("Invalid Password");
     }
-    else if(temp==false){
+    else if(temp==false)
+    {
         alert("Username already exist!!");
     }
-    else{
+    else
+    {
         flag=true;
     }
+    
     if(flag==true)
     {
         let dataObj= {
@@ -82,11 +100,14 @@ function getData() {
     
     }
 }
-function redirect(){
+
+function redirect()
+{
    window.location.href="../loginIndex.html";
 }
 
-function checkuname(uname){
+function checkuname(uname)
+{
     let localData = JSON.parse(localStorage.getItem("values")) || [];
 
     for(let i of localData)
@@ -95,12 +116,12 @@ function checkuname(uname){
         {
             return (false);
             break;
-
         }
     } 
 }
 
-function checkGender(){
+function checkGender()
+{
     let a= document.querySelectorAll('input[name="gender"]');
     let count=0;
     for( let i=0; i<a.length;i++)
@@ -116,6 +137,7 @@ function checkGender(){
     }
 
 }
+
 function uploadImg()
 {
     let Image = document.getElementById("profileimg").files[0];

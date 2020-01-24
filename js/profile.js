@@ -1,7 +1,15 @@
+(function()
+{
+    if(sessionStorage.getItem("values")==null)
+    {
+        window.location.href="../loginIndex.html";
+       
+    }
+})();
+
 let sessionData = sessionStorage.getItem("values");
-// alert(sessionData);
 let localData = JSON.parse(localStorage.getItem("values"));
-// alert(localData);
+
 let data;
 
 for(let i of localData)
