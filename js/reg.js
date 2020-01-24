@@ -83,7 +83,7 @@ function getData() {
     }
 }
 function redirect(){
-   window.location.href="./loginIndex.html";
+   window.location.href="../loginIndex.html";
 }
 
 function checkuname(uname){
