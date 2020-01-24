@@ -1,0 +1,107 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(230, 228, 228);
+}
+header{
+    width: 100%;
+    background-color: rgb(65, 61, 61);
+    height: 50px;
+    line-height: 50px;
+    padding: 0px 25px;
+    margin: 0px auto;
+
+}
+
+/* .table th, .addRow .head{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(49, 204, 196);
+    text-align: center;
+} */
+
+/* .header{
+    width: 1300px;
+    border: 1px solid white;
+    padding: 0px 25px;
+    margin: 0px auto;
+} */
+
+.heading{
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+}
+
+#name{
+    margin-right: 10px;
+}
+
+.clear{
+    clear: both;
+}
+#list , .list1{
+    display: inline-block;
+    width: 82%;
+    /* border: 1px solid black; */
+    margin-right: 25px;
+    vertical-align: top;
+}
+/* .profilePic{
+    display: inline-block;
+    width: 15%;
+    border: 1px solid black;
+    height: 80px;
+} */
+.profileBox{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    /* border: 1px solid black; */
+    /* vertical-align: middle;
+    margin-left: 20px; */
+
+}
+
+.container{
+    width: 100%;
+    /* border: 1px solid black; */
+    padding: 0px 28px;
+    margin: 10px auto 50px;
+}
+h1{
+    display: inline-block;
+    font-size: 28px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.head, #head1{
+    background-color: rgb(49, 204, 196);
+}
+.table,.addRow,th,tr,td{
+    border: 1px solid rgb(201, 199, 199);
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 15px 25px;
+}
+
+tr{
+    background-color: rgba(45, 190, 190, 0.212);
+}
+/* 
+tr{
+    background-color: rgba(45, 190, 190, 0.212);
+    padding: 15px 25px;
+} 
+*/
+
+.table, .addRow{
+    width: 100%;
+}
+.addRow{
+    margin-top: 50px;
+    margin-bottom:  50px;
+}
