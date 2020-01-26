@@ -14,7 +14,7 @@
                 <input type="button" id="profile" value="Profile" onclick=todoData.redirect();>
                 <input type="button" value="Delete" onclick=todoData.deleteTask();>
                 <input type="button" value="Mark Done" onclick=todoData.setStatus();>
-                <select id="filter" onchange="todoData.sortBy()">
+                <select id="filter" onchange="todoData.filterBy()">
                         <option>All</option>
                         <option value="Home">Home</option>
                         <option value="Work">Work</option>
@@ -95,9 +95,6 @@
                    
                 </div>
 
-             
-
-                
                 <script src="../js/todo.js"></script>   
       
     </body>

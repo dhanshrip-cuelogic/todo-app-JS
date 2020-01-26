@@ -5,60 +5,81 @@ var loginData=(function()
     //     window.location.href="loginIndex.html";
        
     // }
+    /* 
+     If Local Sorage is no present in the browser then it will show an alert that browser does not have Local Storage.
+    */
     if(!localStorage)
     {
         alert("Browser is not having local storage!!!!");
     }
 
-    let logname, logpass;
-    let regData= JSON.parse(localStorage.getItem("values")) || [];
+
+
+    let loginName, loginPassword;
+    let localStorageData= JSON.parse(localStorage.getItem("values")) || [];
     let flag=false;
 
     
     
     return{
 
-        
-        getLogData:function()
+        /*
+        * getLoginData()- Function will take login details entered into fields.
+
+        * matchData()- Function will check whether the login details are already registered or not.
+        */
+        getLoginData:function()
         { 
-            logname = document.getElementById("username").value;
-            logpass = document.getElementById("password").value;
-            regData = JSON.parse(localStorage.getItem("values")) || [];
+            loginName = document.getElementById("username").value;
+            loginPassword = document.getElementById("password").value;
+            localStorageData = JSON.parse(localStorage.getItem("values")) || [];
         
-            if(logname=="" || logpass=="")
+            if(loginName=="" || loginPassword=="")
             {
         
                 alert("Please fill all the details.");
             }
             else
             {
-                this.validateData();
+                this.matchData();
             }
         
         },
 
+        /*
+        * redirect()- Function will redirect to user to todo page after successful login of user.
+        
+        */
         redirect:function ()
         {
             alert("Login Successful");
             window.location.href="./page/todoPage.html";
         },
 
-        validateData:function()
+        /*
+        * matchData()- Function will check whether the login details are already registered or not.
+
+        * flag- It will set to true if login name is found registered and it will then check the password of that user,
+               if password matches with the registered password then only it will create a session for that user,
+               and it will redirect to the todo Page.
+
+        */
+        matchData:function()
         {
             flag=false;
 
-            for(let i in regData)
+            for(let i in localStorageData)
             {
-                let regName= regData[i].uname;
+                let registeredName= localStorageData[i].uname;
 
-                if(regName==logname)
+                if(registeredName==loginName)
                 {    
-                    let regPass=regData[i].pass;  
+                    let registeredPass=localStorageData[i].pass;  
                     flag=true;
 
-                    if(regPass==logpass)
+                    if(registeredPass==loginPassword)
                     {
-                        sessionStorage.setItem('values',logname);
+                        sessionStorage.setItem('values',loginName);
                         this.redirect();
                     }
                     else

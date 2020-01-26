@@ -1,6 +1,13 @@
 var profileData=(function()
 {
     
+    /*
+     * sessionData- It is used to store session data values.
+
+     * LocalData- It is used to store details of Local Data.
+     
+     * data- It is used to store all the details of that particular user.
+     */
     let sessionData = sessionStorage.getItem("values");
     let localData = JSON.parse(localStorage.getItem("values"));
 
@@ -21,8 +28,13 @@ var profileData=(function()
         }
     }   
 
+    document.getElementById("profilePic").src = data.profileimg;
+
     return{
 
+    /*
+     * displayData()- Function is used to display the personal details of user in respected fields of profile page. 
+     */
         displayData: function(){
 
             let uname=data.uname;
@@ -50,12 +62,14 @@ var profileData=(function()
     
         },
 
-        editProfile:  function(){
+        /*
+        * editProfile()- Function is used to enable the disabled fields to edit the details. 
+        */
+        editProfile: function(){
 
 
                 document.getElementById("save").style.display="inline-block";
                 document.getElementById("addbtn").style.display="none";
-            
             
                 document.getElementById("pass").disabled=false;
                 document.getElementById("fname").disabled=false;
@@ -65,6 +79,10 @@ var profileData=(function()
             
             },
 
+        /*
+        * saveData()- Function is used to get the data from the fields and save into the local storage.
+                        After editing the data fields are disabled again. 
+        */
         saveData: function (){
         
             document.getElementById("save").style.display="none";
@@ -108,6 +126,13 @@ var profileData=(function()
         
         },
 
+        /**
+         * validateProfile()- Function is used to check whether the editted details are valid or not.
+         
+         * Input values:- First Name, Last Name, Address, Password, Gender.
+
+         * flag- It will set to true if all the input values are valid, and then only it will store the data into localstorage.
+         */
         validateProfile: function (){
 
                 let fname= document.getElementById("fname").value;
@@ -151,6 +176,10 @@ var profileData=(function()
             
             },
 
+            /*
+            * checkGender()- Function will check whether user has selected any gender value or not.
+                            If not then it will show an alert to select any one gender value.
+            */
             checkGender: function(){
 
                 let a= document.querySelectorAll('input[name="gender"]');
@@ -168,12 +197,8 @@ var profileData=(function()
                 }
 
             }
-        
-    
     
     };
-    
-    
 
 })();
 
