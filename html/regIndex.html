@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/regStyle.css">
+    <script src="../js/reg.js"></script>
+    
+    <title>Registration Page</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Registration Page</h1>
+
+            <form id= "myform">
+
+                <div class="regInput">
+                    <label for="username" class="regLabel">Username</label><span>*</span><br>
+                    <input type="text" id="username" class="logInput">
+                </div>
+                <div class="regInput">
+                    <label for="fname" class="regLabel">Name</label><span>*</span><br>
+                    <input type="text" id="fname" placeholder="First name">&nbsp;&nbsp;
+                    <input type="text" id="lname" placeholder="Last name">
+                </div>
+                <div class="regInput">
+                    <label for="gender" class="regLabel">Gender</label><span>*</span>
+                    &nbsp;&nbsp;&nbsp;
+                    Male<input type="radio" name="gender" value="Male">&nbsp;
+                    Female<input type="radio" name="gender" value="Female">&nbsp;
+                    Other<input type="radio" name="gender" value="Other">
+                </div>
+                <div class="regInput">
+                    <label for="address" class="regLabel">Address</label><br>
+                    <textarea name="address" id="address" cols="30" rows="5" class="logInput" style="resize: none;"></textarea>
+                </div>
+                <div class="password regInput"> 
+                    <label for="password" class="regLabel">Password</label><span>*</span><br>
+                    <input type="password" name="password" id="password" class="logInput">
+                    <span>
+                        First word of password must be Capital <br>
+                        &nbsp;&nbsp;&nbspPassword must contain atleast one special symbol and 1 numeric digit. <br>
+                        &nbsp;&nbsp;&nbspPassword length must be atleast 8.
+
+                    </span>
+                </div>
+                <div class="password regInput">
+                    <label for="confirmPass" class="regLabel"> Confirm Password</label><span>*</span><br>
+                    <input type="password" name="confirmPass" id="confirmPass" class="logInput">
+                </div>
+                <div class="regInput">
+                    <label for="profile" class="regLabel">Profile&nbsp;&nbsp;&nbsp;</label>
+                    <input type="file" value="PROFILE PICTURE" id="profileimg"  onchange="regData.uploadImg();">
+                    <div class="profileBox">
+                        <img id="profilePic" alt="profile image" style="width: 110px; height: 100px;">
+                    </div>
+                </div>
+                <div class="submitbtn" style="text-align: center;"><br>
+                    <input type="button" id="submit" onclick="regData.getRegisteredData()" value="Submit"><br><br>
+                    <a href="../index.html">Login</a>
+                </div>
+            
+            </form>
+      
+        </div>
+    
+    </body>
+</html>
