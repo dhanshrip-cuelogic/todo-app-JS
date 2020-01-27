@@ -1,4 +1,4 @@
-todoData=(function () {
+var todoData=(function () {
     // if (sessionStorage.getItem("values") == null) {
     //     window.location.href = "../index.html";
 
