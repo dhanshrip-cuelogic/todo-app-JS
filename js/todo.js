@@ -1,6 +1,6 @@
 todoData=(function () {
     // if (sessionStorage.getItem("values") == null) {
-    //     window.location.href = "../loginIndex.html";
+    //     window.location.href = "../index.html";
 
     // }
 
@@ -47,45 +47,6 @@ todoData=(function () {
         return category;
     }
 
-    /*
-    *editData()- Function is used to display the data of that row into the editting table,
-                    so that user can change the details and save it into local storage.
-
-    *editItem- It will take all the details of particular task which user wants to edit.
-
-    * "t" - It is a variable which will take the value of that particular task which will be passed to saveChanges(),
-            to change the details of that task.
-    */
-    function editData(i) {
-
-        let editItem = data.todoObj[i];
-
-        let task = editItem.task;
-        let startdate = editItem.startdate;
-        let duedate = editItem.duedate;
-        let category = editItem.category;
-    
-        clearChecks();
-    
-        document.getElementById("task").value = task;
-        document.getElementById("startdate").value = startdate;
-        document.getElementById("duedate").value = duedate;
-        if (category == "Home") {
-            document.getElementsByName("category")[0].checked = true;
-        }
-        else if (category == "Work") {
-            document.getElementsByName("category")[1].checked = true;
-        }
-        else {
-            document.getElementsByName("category")[2].checked = true;
-        }
-    
-        document.getElementById("save").style.display = "inline-block";
-        document.getElementById("add").style.display = "none";
-    
-        t = i;
-    }
-    
     /**
      * clearList()- Function is used to clear the whole task table before displaying any newly added, updated or deleted task. 
      */
@@ -133,6 +94,45 @@ todoData=(function () {
     }
     
     return{
+
+        /*
+        *editData()- Function is used to display the data of that row into the editting table,
+                        so that user can change the details and save it into local storage.
+
+        *editItem- It will take all the details of particular task which user wants to edit.
+
+        * "t" - It is a variable which will take the value of that particular task which will be passed to saveChanges(),
+                to change the details of that task.
+        */
+        editData: function(i) {
+
+            let editItem = data.todoObj[i];
+    
+            let task = editItem.task;
+            let startdate = editItem.startdate;
+            let duedate = editItem.duedate;
+            let category = editItem.category;
+        
+            clearChecks();
+        
+            document.getElementById("task").value = task;
+            document.getElementById("startdate").value = startdate;
+            document.getElementById("duedate").value = duedate;
+            if (category == "Home") {
+                document.getElementsByName("category")[0].checked = true;
+            }
+            else if (category == "Work") {
+                document.getElementsByName("category")[1].checked = true;
+            }
+            else {
+                document.getElementsByName("category")[2].checked = true;
+            }
+        
+            document.getElementById("save").style.display = "inline-block";
+            document.getElementById("add").style.display = "none";
+        
+            t = i;
+        },
 
         /**
          * showData()- Function is used to clear the checkbox value before showing selected checked value.
@@ -222,6 +222,7 @@ todoData=(function () {
             let task = document.getElementById("task").value;
             let startdate = document.getElementById("startdate").value;
             let duedate = document.getElementById("duedate").value;
+            let category= getCategory();
             
             let values = validateAdd(task, startdate, duedate, category);
         
@@ -230,7 +231,7 @@ todoData=(function () {
                 editItem.task = document.getElementById("task").value;
                 editItem.startdate = document.getElementById("startdate").value;
                 editItem.duedate = document.getElementById("duedate").value;
-                editItem.category=getCategory();
+                editItem.category= category;
                 
                 document.getElementById("save").style.display = "none";
                 document.getElementById("add").style.display = "inline-block";
@@ -372,8 +373,8 @@ todoData=(function () {
             "<td>" + todoItems[i].startdate + "</td>" +
             "<td>" + todoItems[i].duedate + "</td>" +
             "<td>" + todoItems[i].status + "</td>" +
-            "<td>" + '<button id="edit' + i + '" style="display: inline-block;" onclick="this.editData(' + i + ');">Edit</button>' +
-            '<a><button id="del' + i + '" style="display: none;" onclick="this.deleteSingle(' + i + ')">Delete</button></a>' + "</td>";
+            "<td>" + '<button id="edit' + i + '" style="display: inline-block;" onclick="todoData.editData(' + i + ');">Edit</button>' +
+            '<a><button id="del' + i + '" style="display: none;" onclick="todoData.deleteSingle(' + i + ')">Delete</button></a>' + "</td>";
         
             list.appendChild(row);
         
@@ -395,6 +396,14 @@ todoData=(function () {
 
             document.getElementById("table").deleteRow(i);
             data.todoObj.splice(i, 1);
+
+            if (data.todoObj.length == 0) {
+                document.getElementById("head1").style.visibility = "hidden";
+        
+            }
+            else {
+                document.getElementById("head1").style.visibility = "visible";
+            }
 
             localStorage.setItem("values", JSON.stringify(localData));
 

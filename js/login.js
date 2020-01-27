@@ -5,6 +5,8 @@ var loginData=(function()
     //     window.location.href="index.html";
        
     // }
+
+    
     /* 
      If Local Sorage is no present in the browser then it will show an alert that browser does not have Local Storage.
     */
