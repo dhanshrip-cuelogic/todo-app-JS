@@ -123,7 +123,7 @@ var regData=(function()
         */
         redirect: function ()
         {
-            window.location.href="../loginIndex.html";
+            window.location.href="../index.html";
         },
 
         /*

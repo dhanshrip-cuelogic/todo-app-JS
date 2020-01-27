@@ -13,7 +13,7 @@ var profileData=(function()
 
     if(sessionData==null)
     {
-        window.location.href="../loginIndex.html";
+        window.location.href="../index.html";
        
     }
 

@@ -2,7 +2,7 @@ var loginData=(function()
 {
     // if(sessionStorage.getItem("values")==null)
     // {
-    //     window.location.href="loginIndex.html";
+    //     window.location.href="index.html";
        
     // }
     /* 
@@ -53,7 +53,7 @@ var loginData=(function()
         redirect:function ()
         {
             alert("Login Successful");
-            window.location.href="./page/todoPage.html";
+            window.location.href="./html/todoPage.html";
         },
 
         /*

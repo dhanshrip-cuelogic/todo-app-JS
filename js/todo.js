@@ -255,7 +255,7 @@ todoData=(function () {
         */
         backToLogin: function () {
             sessionStorage.clear();
-            window.location.href = "../loginIndex.html";
+            window.location.href = "../index.html";
         },
 
         /*
@@ -265,7 +265,7 @@ todoData=(function () {
                         And with the use of splice the rest of the index will get shifted one by one. 
         */
         deleteTask: function () {
-            let tableData = document.getElementById("table")
+            let tableData = document.getElementById("table");
             let allCheckedData = tableData.getElementsByTagName("input");
             for (let i = allCheckedData.length - 1; i >= 0; i--) {
                 if (allCheckedData[i].checked) {
@@ -372,8 +372,8 @@ todoData=(function () {
             "<td>" + todoItems[i].startdate + "</td>" +
             "<td>" + todoItems[i].duedate + "</td>" +
             "<td>" + todoItems[i].status + "</td>" +
-            "<td>" + '<button id="edit' + i + '" style="display: inline-block;" onclick="editData(' + i + ');">Edit</button>' +
-            '<a><button id="del' + i + '" style="display: none;" onclick="deleteSingle(' + i + ')">Delete</button></a>' + "</td>";
+            "<td>" + '<button id="edit' + i + '" style="display: inline-block;" onclick="this.editData(' + i + ');">Edit</button>' +
+            '<a><button id="del' + i + '" style="display: none;" onclick="this.deleteSingle(' + i + ')">Delete</button></a>' + "</td>";
         
             list.appendChild(row);
         
@@ -382,6 +382,22 @@ todoData=(function () {
                 document.getElementById("del" + i).style.display = "inline-block";
         
             }
+        },
+
+        /**
+         * deleteSingle()- Function is used to delete that particular task if that task is completed. 
+         * @param i- It contains the value of task which needs to be deleted from the array of task.  
+         */
+        deleteSingle: function (i)
+        {
+
+            let tableData = document.getElementById("table");
+
+            document.getElementById("table").deleteRow(i);
+            data.todoObj.splice(i, 1);
+
+            localStorage.setItem("values", JSON.stringify(localData));
+
         }
     
         
@@ -390,10 +406,3 @@ todoData=(function () {
 })();
 
 todoData.showData();
-
-// function deleteSingle(i)
-// {
-//     let editItem=data.todoObj[i];
-
-// }
-
