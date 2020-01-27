@@ -43,6 +43,20 @@ var profileData=(function()
             let fname=data.fname;
             let lname=data.lname;
             let gender=data.gender;
+
+            document.getElementById("pass").disabled=true;
+            document.getElementById("fname").disabled=true;
+            document.getElementById("lname").disabled=true;
+            // document.getElementsByName("gender").disabled=true;
+            document.querySelectorAll('input[name="gender"]').disabled=true;
+        
+            // for(var i=0;i<a.length;i++)
+            //  {
+            //     (a[i].disabled==true);
+            
+            //  } 
+        
+            document.getElementById("add").disabled=true;
     
             document.getElementById("uname").value=uname;
             document.getElementById("pass").value=pass;
